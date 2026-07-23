@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Week 2 - Registration Form & Table</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <center>
+        <h2>Student Event Registration</h2>
+    </center>
+    
+    <!-- Registration Form Container -->
+    <div class="form-container">
+        <h3>Registration Form</h3>
+        <form>
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regno">Register Number:</label>
+                <input type="text" id="regno" name="regno" placeholder="Enter register number" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email ID" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="dept">Department:</label>
+                <select id="dept" name="dept" required>
+                    <option value="">--Select Department--</option>
+                    <option value="ECE">Electronics and Communication (ECE)</option>
+                    <option value="CSE">Computer Science (CSE)</option>
+                    <option value="IT">Information Technology (IT)</option>
+                    <option value="EEE">Electrical and Electronics (EEE)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="Male"> Male
+                <input type="radio" id="female" name="gender" value="Female"> Female
+            </div>
+
+            <div class="form-group">
+                <label>Preferred Skills:</label>
+                <input type="checkbox" id="skill1" name="skills" value="C++"> C++
+                <input type="checkbox" id="skill2" name="skills" value="Python"> Python
+                <input type="checkbox" id="skill3" name="skills" value="Web Dev"> Web Dev
+            </div>
+            
+            <button type="submit" class="submit-btn">Register</button>
+            <button type="reset" class="reset-btn">Reset</button>
+        </form>
+    </div>
+
+    <!-- Registered Students Table Container -->
+    <div class="table-container">
+        <h3>Registered Students List</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Reg No</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2403727710621136</td>
+                    <td>Nitin V Timothy</td>
+                    <td>ECE</td>
+                    <td>727724euec136@skcet.ac.in</td>
+                    <td>Male</td>
+                    <td>C++, Python, Web Dev</td>
+                </tr>
+                <tr>
+                    <td>2403727710621101</td>
+                    <td>Adithya K</td>
+                    <td>CSE</td>
+                    <td>adithyak@skcet.ac.in</td>
+                    <td>Male</td>
+                    <td>Python, Web Dev</td>
+                </tr>
+                <tr>
+                    <td>2403727710621145</td>
+                    <td>Priya S</td>
+                    <td>ECE</td>
+                    <td>priyas@skcet.ac.in</td>
+                    <td>Female</td>
+                    <td>C++</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
