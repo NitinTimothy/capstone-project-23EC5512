@@ -1,78 +1,76 @@
-# 📊 COLLEGE PRESENTATION SLIDES (5-Minute Viva Deck)
+# 📊 COLLEGE PRESENTATION SLIDES (5-Minute Viva Deck v2.0)
 
 ## Slide 1: Title & Introduction
-- **Project Title**: Smart Buy Advisor — Full Cash vs. EMI + Investment Growth Calculator
-- **Tech Stack**: React 18, JavaScript ES6, HTML5, CSS3, Web Storage API (localStorage)
-- **Presenter**: [Your Name]
-- **Key Highlight**: A financial tool to calculate whether buying on EMI & investing the balance saves more money than paying full cash upfront.
+- **Project Title**: Smart Buy Advisor v2.0 — Full Cash vs. EMI + Salary Pledge & Investment Calculator
+- **Tech Stack**: React 18, JavaScript ES6, HTML5, CSS3, Web Storage API (localStorage), Vite
+- **Presenter**: Nitin V Timothy (Reg No: 2403727710621136, BE ECE)
+- **Live Demo Link**: `https://nitintimothy.github.io/capstone-project-23EC5512/smart-buy-advisor/`
 
 ---
 
-## Slide 2: The Problem Statement
-- **Common Dilemma**: "I have ₹1.2 Lakhs cash. Should I buy the new iPhone in full cash or opt for 12 months No-Cost EMI?"
-- **The Misconception**: Most people pay full cash thinking "I avoid debt/interest."
-- **The Reality**: Paying full cash forfeits the opportunity to earn interest/returns on that ₹1.2 Lakhs capital over the year!
+## Slide 2: The Core Dilemma & v2.0 Innovation
+- **Scenario**: "I have ₹1.2 Lakhs cash. Should I buy a laptop in full cash or opt for 12 months No-Cost EMI?"
+- **The Misconception**: Paying full cash feels safe, but forfeits 12 months of compound interest on ₹1.2 Lakhs!
+- **v2.0 Innovation — Salary EMI Pledge**: What if the buyer pledges to pay 100% of monthly EMIs from their monthly salary income?
+- **Result**: The ₹1.2 Lakhs initial cash stays **100% untouched** in mutual funds, compounding at full annual ROI!
 
 ---
 
-## Slide 3: The Solution
-- **Smart Buy Advisor** evaluates both choices side-by-side in real-time.
-- Simulates month-by-month compound growth of unspent capital invested in Mutual Funds / Liquid Funds (@ 10-12% ROI).
-- Factors in Processing Fees, Bank Interest Rates, Down Payment, and No-Cost Subventions.
+## Slide 3: Interactive Features
+1. **Purchase Controls**: Item Price, Down Payment, Tenure (3-36 months), EMI Scheme (Standard vs. No-Cost).
+2. **Salary Pledge Slider ($0-100\%$)**:
+   - `0%`: EMI withdrawn from fund balance.
+   - `50%`: Hybrid (half from salary, half from fund).
+   - `100%`: Full Salary Pledge (capital stays 100% untouched).
+3. **Extra Capital Injection**: Top-up initial investment pool.
+4. **Month-by-Month Schedule**: Table showing Salary Paid vs Fund Withdrawn per month.
+5. **LocalStorage CRUD**: Save, load, and delete comparison scenarios locally.
 
 ---
 
-## Slide 4: Key Features & Demo Flow
-1. **Interactive Inputs**: Item Price, Down Payment, Tenure (3 to 36 months), EMI scheme type, ROI %.
-2. **Quick Presets**: Pre-loaded buttons for iPhone, Gaming Laptop, EV Scooter, 4K TV.
-3. **Smart Verdict Banner**: Instantly displays net cash saved in Green/Yellow.
-4. **Month-by-Month Schedule**: Tabular breakdown of monthly starting fund, ROI earned, EMI paid, and ending balance.
-5. **Local Storage CRUD**: Save scenarios locally for future reference without backend dependencies.
-
----
-
-## Slide 5: Mathematical Model
+## Slide 4: Mathematical Model (v2.0)
 - **Standard EMI Formula**:
   $$E = \frac{P \cdot r \cdot (1+r)^n}{(1+r)^n - 1}$$
-- **Monthly Compound Growth**:
-  $$B_t = B_{t-1} \cdot (1 + m) - E$$
+- **Salary-Pledged Compound Growth**:
+  $$B_t = B_{t-1} \cdot (1 + m) - \left[ E \cdot \left(1 - \frac{S}{100}\right) \right]$$
 
 ---
 
-## Slide 6: Real-World Example (iPhone 16 Pro @ ₹1,20,000)
-- **Option A (Full Cash)**: Outflow = ₹1,20,000 on Day 1. Future Value = ₹0.
-- **Option B (12m No-Cost EMI + 12% ROI Investment)**:
-  - Initial Invested Fund: ₹1,18,800 (after 1% fee).
-  - Total EMIs Paid: ₹10,000/mo × 12 = ₹1,20,000.
-  - Total Investment Returns Earned: +₹7,080.
-  - **Net Savings**: **~₹14,250 over Full Cash!**
+## Slide 5: Real-World Case Study (iPhone 16 Pro @ ₹1,20,000)
+- **Option A (Full Upfront Cash)**: Total Outflow = ₹1,20,000. Ending Fund = ₹0.
+- **Option B (12m No-Cost EMI + 100% Salary Pledge @ 12% ROI)**:
+  - Initial Capital Invested: ₹1,18,800.
+  - Monthly EMI Paid from Salary: ₹10,000/mo.
+  - Fund Balance Withdrawal: **₹0/month!**
+  - Total Investment Returns Earned: **+₹15,068**.
+  - **Final Accumulated Wealth Fund: ₹1,33,868!**
 
 ---
 
-## Slide 7: Technical Architecture & Code Structure
-- Modular React Components:
-  - `Header.jsx`: Title, Logo & Presets
-  - `CalculatorForm.jsx`: Inputs & Range Sliders
-  - `SummaryCards.jsx`: Side-by-side comparison cards
-  - `CashflowSchedule.jsx`: Interactive month-by-month table
+## Slide 6: Technical Architecture
+- **Component Hierarchy**:
+  - `Header.jsx`: Branding & Presets
+  - `CalculatorForm.jsx`: Sliders, Inputs, Salary Pledge controls
+  - `SummaryCards.jsx`: Wealth acceleration metrics & Verdict Banner
+  - `CashflowSchedule.jsx`: Tabular monthly breakdown
   - `SavedScenarios.jsx`: LocalStorage scenario history
-  - `calculatorEngine.js`: Pure mathematical utility
-  - `storageService.js`: Web Storage API CRUD abstraction
+  - `calculatorEngine.js`: v2.0 Pure JS financial formulas
 
 ---
 
-## Slide 8: Why Client-Side LocalStorage?
-- **100% Offline & Reliable**: Starts instantly on any laptop without needing a backend server or database running.
-- **Fast Performance**: Zero network latency for real-time recalculation.
-- **Persistence**: Saved calculations survive browser refreshes.
+## Slide 7: GitHub Pages Deployment (Option A)
+- Static compilation using Vite (`base: './'`).
+- Builds production distribution bundles (`npm run build`).
+- Hosted statically live on GitHub Pages — zero server setup required!
 
 ---
 
-## Slide 9: Conclusion
-- Smart Buy Advisor empowers buyers to make mathematically sound financial decisions.
-- Demonstrates core React concepts (State, Hooks, Effects, Form Handling, Modular Architecture) covered in Weeks 1–6.
+## Slide 8: Conclusion & Key Learnings
+- Demonstrates advanced financial compounding models applied to everyday retail purchases.
+- Fulfills 100% of curriculum topics (React Components, Hooks, State, LocalStorage, Form Validation, Static Build & Deployment).
 
 ---
 
-## Slide 10: Q&A / Demo
-- *Thank You! Open for Questions & Live Project Demo.*
+## Slide 9: Live Demo & Q&A
+- *Live Demo at: https://nitintimothy.github.io/capstone-project-23EC5512/smart-buy-advisor/*
+- *Open for Questions.*
