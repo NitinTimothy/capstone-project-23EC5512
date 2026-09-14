@@ -25,15 +25,15 @@ export default function SavedScenarios({ scenarios, onLoad, onDelete, onClearAll
             <div className="scenario-info">
               <h4>{item.itemName}</h4>
               <p className="scenario-meta">
-                Price: ₹{(item.totalPrice || 0).toLocaleString('en-IN')} | Tenure: {item.tenureMonths}m |{' '}
-                {item.emiScheme === 'nocost' ? 'No-Cost EMI' : 'Standard EMI'} | Pledge: {item.salaryPledgePercent || 0}% Salary
+                Original: ₹{(item.totalPrice || 0).toLocaleString('en-IN')} | Real Cost: ₹{(item.realEffectiveCost || 0).toLocaleString('en-IN')} |{' '}
+                {item.emiScheme === 'nocost' ? 'No-Cost EMI' : 'Standard EMI'} ({item.tenureMonths}m)
               </p>
             </div>
 
             <div className="scenario-savings">
               <span className={`savings-badge ${item.isEmiBetter ? 'badge-green' : 'badge-red'}`}>
                 {item.isEmiBetter
-                  ? `Saves ₹${(item.netSavings || 0).toLocaleString('en-IN')}`
+                  ? `Saves ₹${(item.netSavings || 0).toLocaleString('en-IN')} (${item.effectiveDiscountPercent || 0}% OFF)`
                   : 'Full Cash Better'}
               </span>
             </div>

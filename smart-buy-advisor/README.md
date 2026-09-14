@@ -1,61 +1,33 @@
-# 💡 Smart Buy Advisor v2.0 — Full Cash vs. EMI + Salary Pledge & Investment Growth Calculator
+# 💡 Smart Buy Advisor v2.0 — Full Cash vs. EMI + Salary Pledge & Real Cost Calculator
 
-> **A React-powered financial decision engine that compares buying an item in Full Upfront Cash vs. EMI (Standard & No-Cost EMI) while leveraging Salary EMI Pledges ($0-100\%$) and compounding capital surplus in investment vehicles.**
-
----
-
-## 📌 What's New in v2.0?
-- **💼 Salary EMI Pledge ($0\%$ to $100\%$)**: Pledging monthly EMI payments directly from incoming salary keeps the initial invested capital ($P$) **100% untouched** in mutual funds / liquid funds, compounding at full annual ROI for maximum wealth acceleration!
-- **💰 Additional Capital Injection**: Top-up the initial investment pool with lump-sum extra capital.
-- **🌐 GitHub Pages Live Hosting Ready**: Configured with Vite relative static build asset pathing for instant online hosting on GitHub Pages.
-- **📊 Enhanced Cashflow Breakdown**: Displays split EMI contributions (Salary Outflow vs. Fund Withdrawal) month-by-month.
+> **A React-powered financial decision engine that compares buying an item in Full Upfront Cash vs. EMI (Standard & No-Cost EMI) while using Investment Returns ($R_{earned}$) to subsidize and discount the Real Effective Out-of-Pocket Cost of the item.**
 
 ---
 
-## ✨ Key Features
-- **⚡ Dual EMI Scheme Support**: Calculates both **No-Cost EMI** (with subvention discount) and **Standard EMI** (with annual interest rates).
-- **💼 Salary Pledge Strategy Engine**: Toggle between 0% Fund Withdrawal, 50% Hybrid, or 100% Full Salary Pledge to visualize how compounding accelerates when capital remains untouched.
-- **📈 Investment Growth Engine**: Simulates month-by-month compound growth of unspent capital in mutual funds or debt instruments.
-- **📊 Real-time Cashflow Table**: Detailed breakdown showing monthly starting fund balance, ROI earned, Salary EMI contribution, Fund EMI withdrawal, and ending balance.
-- **💾 LocalStorage CRUD**: Save, view, load, and delete comparison scenarios locally with zero external server requirement.
-- **📱 Quick Presets**: One-click pre-filled presets for popular products (iPhone 16 Pro, Gaming Laptop, EV Scooter, 4K Smart TV).
+## 📌 Result Depiction Architecture (v2.0 Refined)
+
+When you buy an item via EMI & retain your savings capital in an investment vehicle:
+1. **Original Purchase Outflow ($C_{original}$)**: The total cash paid out of pocket (Down Payment + Fees + EMIs).
+2. **Investment Return Offset ($R_{earned}$)**: The compound interest earned by leaving your principal savings invested.
+3. **Real Effective Cost Out-of-Pocket**:
+   $$\text{Real Effective Cost} = C_{original} - R_{earned}$$
+4. **Net Money Saved / Effective Discount**:
+   $$\text{Money Saved} = \text{Full Cash Price} - \text{Real Effective Cost} = R_{earned}$$
+
+### Example Case Study (iPhone 16 Pro @ ₹1,10,000, 36 Months @ 12% ROI)
+- **Full Cash (Option A)**: You pay **₹1,10,000** today out of pocket. Real Cost = **₹1,10,000**.
+- **EMI + Investment (Option B)**:
+  - Down Payment: ₹10,000
+  - 36 EMIs from Salary @ ₹2,778/mo: ₹1,00,000
+  - Original Total Paid: **₹1,10,000**
+  - Investment Returns Earned (12% ROI on ₹1,00,000): **-₹43,077** (Discount Offset)
+  - **Real Effective Cost of Item**: **₹66,923**!
+  - **Effective Discount Realized**: **₹43,077 (39.2% OFF)**!
 
 ---
 
-## 🧮 Mathematical Formulas (v2.0)
-
-### 1. Standard EMI Formula
-$$E = \frac{P \cdot r \cdot (1+r)^n}{(1+r)^n - 1}$$
-
-### 2. Salary Pledge Compound Schedule
-$$B_t = B_{t-1} \cdot (1 + m) - \left[ E \cdot \left(1 - \frac{S}{100}\right) \right]$$
-Where:
-- $B_t$ = Remaining Investment Fund at month $t$
-- $m$ = Monthly ROI rate ($\text{Annual ROI} / 12 / 100$)
-- $E$ = Monthly EMI payment
-- $S$ = Salary Pledge Percentage ($0\%$ to $100\%$)
-
----
-
-## 🚀 Live Demo & How to Run
-
-### Live Online (GitHub Pages)
+## 🚀 Live Online App (GitHub Pages)
 Visit: **[https://nitintimothy.github.io/capstone-project-23EC5512/smart-buy-advisor/](https://nitintimothy.github.io/capstone-project-23EC5512/smart-buy-advisor/)**
-
-### Local Development
-```bash
-# Navigate to project directory
-cd smart-buy-advisor
-
-# Install dependencies
-npm install
-
-# Build static production assets for GitHub Pages
-npm run build
-
-# Start local preview server
-npm run dev
-```
 
 ---
 

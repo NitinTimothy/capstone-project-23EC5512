@@ -2,6 +2,10 @@
  * Smart Buy Advisor v2.0 - Financial Engine
  * Calculates Full Cash vs. Standard/No-Cost EMI with Opportunity Growth,
  * Salary EMI Pledge (% paid from salary), and Additional Capital Injections.
+ * 
+ * Result Architecture:
+ * Real Effective Cost of Item = Total Original Cost (Price + Interest + Fees) - Investment Returns Earned.
+ * Net Savings = Cash Cost - Real Effective Cost.
  */
 
 export function calculateBuyStrategy(params) {
@@ -25,12 +29,12 @@ export function calculateBuyStrategy(params) {
   const principalToFinance = P - D;
 
   let monthlyEmi = 0;
-  let totalInterestPaid = 0;
+  let totalBankInterestPaid = 0;
   let totalEmiOutflow = 0;
 
   if (emiScheme === 'nocost') {
     monthlyEmi = principalToFinance / n;
-    totalInterestPaid = 0;
+    totalBankInterestPaid = 0;
     totalEmiOutflow = D + monthlyEmi * n + processingFee;
   } else {
     const r = (Number(annualInterestRate) || 0) / 12 / 100;
@@ -42,7 +46,7 @@ export function calculateBuyStrategy(params) {
       monthlyEmi = principalToFinance / n;
     }
     const totalEmiOnly = monthlyEmi * n;
-    totalInterestPaid = Math.max(0, totalEmiOnly - principalToFinance);
+    totalBankInterestPaid = Math.max(0, totalEmiOnly - principalToFinance);
     totalEmiOutflow = D + totalEmiOnly + processingFee;
   }
 
@@ -83,33 +87,26 @@ export function calculateBuyStrategy(params) {
   }
 
   const finalEndingFund = Math.round(currentBalance);
+  const returnsEarnedRound = Math.round(totalReturnsEarned);
 
-  // --- Clear Financial Position Metrics ---
+  // --- Real Cost & Savings Depiction Architecture ---
 
-  // Option A (Full Cash):
-  // You pay P today. Net Position = -P (Item acquired, fund = 0).
-  const fullCashOutflow = P;
-  const optionANetPosition = -P;
+  // 1. Option A (Full Cash):
+  // You pay P out of pocket today. No interest earned. Real Cost = P.
+  const fullCashCost = P;
 
-  // Option B (EMI + Investment):
-  // Total Out-of-Pocket Cash Paid over tenure = Down Payment + Processing Fee + (Monthly EMI from Salary * n) + (Monthly EMI from Fund * n)
-  // Total Cash Paid out of pocket = D + processingFee + (monthlyEmi * n).
-  const optionBTotalCashPaid = D + processingFee + (monthlyEmi * n);
+  // 2. Option B (EMI + Investment):
+  // Original Nominal Outflow = Down Payment + Processing Fee + Total EMIs
+  const originalPurchaseOutflow = Math.round(D + processingFee + (monthlyEmi * n));
 
-  // Remaining Investment Fund at Month n (excluding extra injected capital for fair item comparison)
-  const netFundAccumulated = finalEndingFund - extraCash;
+  // Real Effective Cost = Original Purchase Outflow minus Investment Returns Earned (Discount Subvention)
+  const realEffectiveCost = Math.max(0, Math.round(originalPurchaseOutflow - returnsEarnedRound));
 
-  // Net Wealth Position for Option B = Accumulated Fund minus Total Cash Spent out of pocket
-  // If positive, user has made a NET PROFIT! If negative, user has a NET COST.
-  const optionBNetPosition = netFundAccumulated - optionBTotalCashPaid;
+  // Net Savings / Money Saved = Full Cash Cost - Real Effective Cost
+  const netSavings = Math.round(fullCashCost - realEffectiveCost);
+  const effectiveDiscountPercent = ((netSavings / P) * 100).toFixed(1);
 
-  // Relative Net Advantage of Option B over Option A (Full Cash)
-  // Net Advantage = Option B Net Position - Option A Net Position
-  // = (netFundAccumulated - optionBTotalCashPaid) - (-P)
-  const netWealthAdvantage = optionBNetPosition - optionANetPosition;
-
-  const isEmiBetter = netWealthAdvantage > 0;
-  const percentageSavings = ((netWealthAdvantage / P) * 100).toFixed(1);
+  const isEmiBetter = netSavings > 0;
 
   return {
     itemName,
@@ -125,18 +122,16 @@ export function calculateBuyStrategy(params) {
     emiFromSalaryMonthly: Math.round(emiFromSalaryMonthly),
     emiFromFundMonthly: Math.round(emiFromFundMonthly),
     totalSalaryContributed: Math.round(totalSalaryContributed),
-    totalInterestPaid: Math.round(totalInterestPaid),
+    totalBankInterestPaid: Math.round(totalBankInterestPaid),
     totalEmiOutflow: Math.round(totalEmiOutflow),
     initialInvestedAmount: Math.round(initialInvestedAmount),
-    totalReturnsEarned: Math.round(totalReturnsEarned),
+    totalReturnsEarned: returnsEarnedRound,
     finalEndingFund,
-    fullCashOutflow,
-    optionANetPosition,
-    optionBTotalCashPaid: Math.round(optionBTotalCashPaid),
-    optionBNetPosition: Math.round(optionBNetPosition),
-    netWealthAdvantage: Math.round(netWealthAdvantage),
-    netSavings: Math.round(netWealthAdvantage),
-    percentageSavings,
+    fullCashCost,
+    originalPurchaseOutflow,
+    realEffectiveCost,
+    netSavings,
+    effectiveDiscountPercent,
     isEmiBetter,
     monthlySchedule,
   };
