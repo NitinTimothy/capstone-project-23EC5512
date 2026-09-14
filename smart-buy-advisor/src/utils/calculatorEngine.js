@@ -71,7 +71,7 @@ export function calculateBuyStrategy(params) {
     const monthStartBalance = currentBalance;
     const interestEarnedThisMonth = monthStartBalance * monthlyRoiRate;
     totalReturnsEarned += interestEarnedThisMonth;
-    
+
     // Fund grows by monthly ROI interest, then unpledged EMI is withdrawn
     const balanceAfterGrowth = monthStartBalance + interestEarnedThisMonth;
     currentBalance = Math.max(0, balanceAfterGrowth - emiFromFundMonthly);
