@@ -12,9 +12,10 @@ export default function SummaryCards({ result, onSave }) {
     initialInvestedAmount,
     totalReturnsEarned,
     finalEndingFund,
-    effectiveEmiNetOutflow,
-    netSavings,
-    percentageSavings,
+    optionANetPosition,
+    optionBTotalCashPaid,
+    optionBNetPosition,
+    netWealthAdvantage,
     isEmiBetter,
     emiScheme,
     salaryPledgePercent,
@@ -26,19 +27,19 @@ export default function SummaryCards({ result, onSave }) {
 
   return (
     <div className="summary-section">
-      {/* Smart Recommendation Banner */}
+      {/* Smart Verdict Banner */}
       <div className={`verdict-banner ${isEmiBetter ? 'verdict-positive' : 'verdict-warning'}`}>
         <div className="verdict-icon">{isEmiBetter ? '🚀' : '⚠️'}</div>
         <div className="verdict-content">
           <h3>
             {isEmiBetter
-              ? `Opting for ${emiScheme === 'nocost' ? 'No-Cost EMI' : 'EMI'} + ${salaryPledgePercent}% Salary Pledge saves you ₹${netSavings.toLocaleString('en-IN')}!`
-              : `Full Cash payment is more economical for this setup.`}
+              ? `Opting for ${emiScheme === 'nocost' ? 'No-Cost EMI' : 'EMI'} + ${salaryPledgePercent}% Salary Pledge leaves you ₹${netWealthAdvantage.toLocaleString('en-IN')} wealthier than Paying Full Cash!`
+              : `Paying Full Upfront Cash is financially better for this configuration.`}
           </h3>
           <p>
             {salaryPledgePercent === 100
-              ? `🔥 100% Salary Pledge Active: Your initial ₹${initialInvestedAmount.toLocaleString('en-IN')} stays 100% untouched and grows by ₹${totalReturnsEarned.toLocaleString('en-IN')} in returns, resulting in ₹${finalEndingFund.toLocaleString('en-IN')} total accumulated fund!`
-              : `By investing ₹${initialInvestedAmount.toLocaleString('en-IN')} upfront, your money earns ₹${totalReturnsEarned.toLocaleString('en-IN')} in returns, leaving you with ₹${finalEndingFund.toLocaleString('en-IN')} after paying EMIs.`}
+              ? `🔥 100% Salary Pledge Strategy: Your initial ₹${initialInvestedAmount.toLocaleString('en-IN')} capital stays 100% untouched for ${tenureMonths} months, earning ₹${totalReturnsEarned.toLocaleString('en-IN')} in compound returns to build a final wealth fund of ₹${finalEndingFund.toLocaleString('en-IN')}!`
+              : `By investing ₹${initialInvestedAmount.toLocaleString('en-IN')} upfront, your money earns ₹${totalReturnsEarned.toLocaleString('en-IN')} in returns, leaving you with ₹${finalEndingFund.toLocaleString('en-IN')} remaining balance after paying all EMIs.`}
           </p>
         </div>
         <button className="save-scenario-btn" onClick={onSave}>
@@ -48,20 +49,20 @@ export default function SummaryCards({ result, onSave }) {
 
       {/* Side by Side Option Cards */}
       <div className="cards-grid">
-        {/* Card 1: Full Cash */}
+        {/* Card 1: Option A (Full Upfront Cash) */}
         <div className="card option-card cash-card">
           <div className="card-badge">Option A</div>
           <h2>💵 Full Upfront Cash</h2>
-          <p className="card-desc">Pay total amount on day 1</p>
+          <p className="card-desc">Pay 100% item price out of pocket on day 1</p>
 
           <div className="metric-box">
-            <span className="metric-label">Immediate Outflow</span>
+            <span className="metric-label">Immediate Cash Outflow</span>
             <span className="metric-value text-red">₹{totalPrice.toLocaleString('en-IN')}</span>
           </div>
 
           <ul className="details-list">
             <li>
-              <span>Monthly EMI:</span> <strong>₹0</strong>
+              <span>Monthly EMI Outflow:</span> <strong>₹0</strong>
             </li>
             <li>
               <span>Salary Outflow:</span> <strong>₹0</strong>
@@ -80,12 +81,12 @@ export default function SummaryCards({ result, onSave }) {
           </div>
         </div>
 
-        {/* Card 2: EMI + Investment Strategy v2.0 */}
+        {/* Card 2: Option B (EMI + Investment Strategy) */}
         <div className="card option-card emi-card">
-          <div className="card-badge badge-green">Option B (v2.0 Strategy)</div>
+          <div className="card-badge badge-green">Option B (Smart Strategy)</div>
           <h2>💳 EMI + Investment & Salary Pledge</h2>
           <p className="card-desc">
-            Pay EMI ({salaryPledgePercent}% Salary / {100 - salaryPledgePercent}% Fund) & invest @ {result.annualRoi}% ROI
+            Pay EMI ({salaryPledgePercent}% Salary / {100 - salaryPledgePercent}% Fund) & invest capital @ {result.annualRoi}% ROI
           </p>
 
           <div className="metric-box">
@@ -105,23 +106,25 @@ export default function SummaryCards({ result, onSave }) {
               <strong>₹{initialInvestedAmount.toLocaleString('en-IN')}</strong>
             </li>
             <li>
-              <span>Total Salary Contributed ({tenureMonths} mos):</span>{' '}
-              <strong className="text-purple">₹{totalSalaryContributed.toLocaleString('en-IN')}</strong>
+              <span>Total Out-of-Pocket Cash Paid:</span>{' '}
+              <strong className="text-muted">₹{optionBTotalCashPaid.toLocaleString('en-IN')}</strong>
             </li>
             <li>
-              <span>Total Investment Returns Earned:</span>{' '}
+              <span>Total Compound Returns Earned:</span>{' '}
               <strong className="text-green">+₹{totalReturnsEarned.toLocaleString('en-IN')}</strong>
             </li>
             <li className="highlight-li">
-              <span>Ending Accumulated Wealth Fund:</span>{' '}
+              <span>Final Accumulated Wealth Fund:</span>{' '}
               <strong className="text-green">₹{finalEndingFund.toLocaleString('en-IN')}</strong>
             </li>
           </ul>
 
           <div className="net-outcome">
-            <span>Effective Net Cost (Relative):</span>
-            <span className="outcome-val text-green">
-              ₹{effectiveEmiNetOutflow.toLocaleString('en-IN')}
+            <span>Net Financial Position:</span>
+            <span className={`outcome-val ${optionBNetPosition >= 0 ? 'text-green' : 'text-red'}`}>
+              {optionBNetPosition >= 0
+                ? `+₹${optionBNetPosition.toLocaleString('en-IN')} Net Profit`
+                : `₹${Math.abs(optionBNetPosition).toLocaleString('en-IN')} Net Cost`}
             </span>
           </div>
         </div>
