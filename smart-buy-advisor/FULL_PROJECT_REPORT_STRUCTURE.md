@@ -9,7 +9,7 @@ Kuniamuthur, Coimbatore – 641008
 ## A MINI PROJECT REPORT
 
 *Submitted by*
-### NITIN V TIMOTHY (2403727710621136 / 727724EUEC136)
+### NITIN V TIMOTHY (2403727710621136)
 
 *In partial fulfillment for the award of the degree of*
 ### BACHELOR OF ENGINEERING
@@ -43,7 +43,7 @@ The Sustainable Development Goals are a collection of 17 global goals designed a
 
 ## BONAFIDE CERTIFICATE
 
-Certified that this mini project report titled **“SMART BUY ADVISOR v2.0: A REAL-TIME FINANCIAL DECISION ENGINE AND INVESTMENT OPPORTUNITY COST SIMULATOR FOR OPTIMAL RETAIL PURCHASING STRATEGIES”** is the bonafide work of **NITIN V TIMOTHY (2403727710621136 / 727724EUEC136)** who carried out the mini project under my supervision.
+Certified that this mini project report titled **“SMART BUY ADVISOR v2.0: A REAL-TIME FINANCIAL DECISION ENGINE AND INVESTMENT OPPORTUNITY COST SIMULATOR FOR OPTIMAL RETAIL PURCHASING STRATEGIES”** is the bonafide work of **NITIN V TIMOTHY (2403727710621136)** who carried out the mini project under my supervision.
 
 <br/>
 
